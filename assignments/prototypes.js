@@ -132,3 +132,75 @@ console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
 // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
 // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+function Hero(attributes) {
+  Humanoid.call(this, attributes);
+}
+
+Hero.prototype = Object.create(Humanoid.prototype);
+
+Hero.prototype.attack = function(opponent, damage) {
+  opponent.healthPoints -= damage;
+  if (opponent.healthPoints <= 0) {
+    opponent.destroy();
+    return `${this.name} attacked ${opponent.name} with ${
+      this.weapons[Math.floor(Math.random() * this.weapons.length)]
+    } for ${damage} health points and defeated them.`;
+  } else {
+    return `${this.name} attacked ${opponent.name} with ${
+      this.weapons[Math.floor(Math.random() * this.weapons.length)]
+    } for ${damage} health points.`;
+  }
+};
+
+function Villain(attributes) {
+  Humanoid.call(this, attributes);
+}
+
+Villain.prototype = Object.create(Humanoid.prototype);
+
+Villain.prototype.attack = function(opponent, damage) {
+  opponent.healthPoints -= damage;
+  if (opponent.healthPoints <= 0) {
+    opponent.destroy();
+    return `${this.name} slashed ${opponent.name} with ${
+      this.weapons[Math.floor(Math.random() * this.weapons.length)]
+    } for ${damage} health points and defeated them.`;
+  } else {
+    return `${this.name} slashed ${opponent.name} with ${
+      this.weapons[Math.floor(Math.random() * this.weapons.length)]
+    } for ${damage} health points.`;
+  }
+};
+
+const hero = new Hero({
+  createdAt: new Date(),
+  dimensions: {
+    length: 4,
+    width: 4,
+    height: 6
+  },
+  healthPoints: 20,
+  name: 'Kayle',
+  team: 'Demacia',
+  weapons: ['Radiant Blast', 'Starfire Spellblade', 'Divine Judgement'],
+  language: 'English'
+});
+
+const villain = new Villain({
+  createdAt: new Date(),
+  dimensions: {
+    length: 1,
+    width: 1,
+    height: 5
+  },
+  healthPoints: 10,
+  name: 'Morgana',
+  team: 'Demacia',
+  weapons: ['Dark Binding', 'Soul Shackles', 'Tormented Shadow'],
+  language: 'English'
+});
+
+console.log(hero.attack(villain, 5));
+console.log(villain.attack(hero, 8));
+console.log(hero.attack(villain, 5));
