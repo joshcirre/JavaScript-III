@@ -194,7 +194,7 @@ const villain = new Villain({
     width: 1,
     height: 5
   },
-  healthPoints: 10,
+  healthPoints: 8,
   name: 'Morgana',
   team: 'Demacia',
   weapons: ['Dark Binding', 'Soul Shackles', 'Tormented Shadow'],
