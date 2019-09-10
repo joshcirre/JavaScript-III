@@ -163,7 +163,7 @@ Villain.prototype.attack = function(opponent, damage) {
   opponent.healthPoints -= damage;
   if (opponent.healthPoints <= 0) {
     opponent.destroy();
-    return `${this.name} slashed ${opponent.name} with ${
+    return `${this.name} attacked ${opponent.name} with ${
       this.weapons[Math.floor(Math.random() * this.weapons.length)]
     } for ${damage} health points and defeated them.`;
   } else {
