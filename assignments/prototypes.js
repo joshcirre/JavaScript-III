@@ -23,6 +23,8 @@ function CharacterStats(attributes) {
   this.healthPoints = attributes.healthPoints;
 }
 
+CharacterStats.prototype = Object.create(GameObject.prototype);
+
 CharacterStats.prototype.takeDamage = function() {
   return `${this.name} took damage.`;
 };
